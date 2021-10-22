@@ -1,20 +1,13 @@
-using Microsoft.Extensions.Options;
-using Src;
+using Microsoft.AspNetCore;
 
-var builder = WebApplication.CreateBuilder(args);
-builder.Configuration.AddJsonFile("my_config.json", optional: false, reloadOnChange: true);
-builder.Services.Configure<MySettings>(builder.Configuration.GetSection("Test"));
+static string GetName(HttpContext ctx) => ctx.RequestServices.GetService<IConfiguration>()["name"];
 
-var app = builder.Build();
-
-string GetHello()
-{
-    using var scope = app.Services.CreateScope();
-    var foo =
-        scope.ServiceProvider.GetService<IOptionsSnapshot<MySettings>>().Value.Name;
-    return $"Hello World! The name is {foo}.";
-}
-
-app.MapGet("/", GetHello);
+var app = WebHost.CreateDefaultBuilder()
+    .ConfigureAppConfiguration(x => x.AddJsonFile("my_config.json", optional: false, reloadOnChange: true))
+    .Configure((ctx, builder) => builder
+           .UseRouting()
+           .UseEndpoints(
+               e => e.MapGet("/", c => c.Response.WriteAsync($"Hello World! The name is {GetName(c)}."))))
+    .Build();
 
 app.Run();
