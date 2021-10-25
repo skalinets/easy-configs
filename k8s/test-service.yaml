@@ -13,6 +13,9 @@ spec:
       labels:
         app: test-service
     spec:
+      volumes:
+      - name: config
+        emptyDir: {}
       containers:
       - name: web
         image: europe-central2-docker.pkg.dev/easy-configs/docker/test-service
@@ -23,6 +26,9 @@ spec:
             memory: 200Mi
         ports:
         - containerPort: 80
+        volumeMounts:
+        - mountPath: /config
+          name: config
       - name: git-sync
         image: openweb/git-sync
         imagePullPolicy: Always
@@ -39,6 +45,9 @@ spec:
           value: FETCH_HEAD
         - name: GIT_SYNC_WAIT
           value: "60"
+        volumeMounts:
+        - mountPath: /config
+          name: config
 ---
 apiVersion: v1
 kind: Service
