@@ -24,6 +24,13 @@ spec:
           requests:
             cpu: 100m
             memory: 200Mi
+        readinessProbe:
+          exec:
+            command:
+            - cat
+            - /config/my_config.json
+          initialDelaySeconds: 1
+          periodSeconds: 5
         ports:
         - containerPort: 80
         volumeMounts:
