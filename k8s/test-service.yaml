@@ -30,7 +30,7 @@ spec:
         - name: VAR_NAME
           value: value
         - name: GIT_SYNC_REPO
-          value: https://github.com/openweb-nl/website-static.git
+          value: https://github.com/skalinets/easy-configs-config.git
         - name: GIT_SYNC_DEST
           value: /config
         - name: GIT_SYNC_BRANCH
@@ -38,7 +38,7 @@ spec:
         - name: GIT_SYNC_REV
           value: FETCH_HEAD
         - name: GIT_SYNC_WAIT
-          value: "10"
+          value: "60"
 ---
 apiVersion: v1
 kind: Service

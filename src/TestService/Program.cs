@@ -5,7 +5,7 @@ static string GetName(HttpContext ctx) => ctx.RequestServices.GetService<IConfig
 var startTime = DateTime.Now;
 
 var app = WebHost.CreateDefaultBuilder()
-    .ConfigureAppConfiguration(x => x.AddJsonFile("my_config.json", optional: false, reloadOnChange: true))
+    .ConfigureAppConfiguration(x => x.AddJsonFile("/config/my_config.json", optional: true, reloadOnChange: true))
     .Configure((ctx, builder) => builder
            .UseRouting()
            .UseEndpoints(
