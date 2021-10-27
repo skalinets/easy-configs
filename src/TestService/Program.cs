@@ -1,10 +1,19 @@
 using Microsoft.AspNetCore;
-
-static string GetName(HttpContext ctx) => ctx.RequestServices.GetService<IConfiguration>()["name"];
+using TestService;
 
 var startTime = DateTime.Now;
 
-const string ConfigPath ="/config/my_config.json";
+string GetContent(HttpContext context) =>
+   string.Join('\n', context
+                         .RequestServices
+                         .GetService<IConfiguration>().GetSection("sessions")
+                         .Get<List<Session>>()
+                         .Select(s => $"{s.Name} [{s.Level}]"))
+
+   + $"\n\nUptime is {DateTime.Now.Subtract(startTime)}";
+
+//const string ConfigPath ="/config/sessions.json";
+const string ConfigPath ="/Users/serhii.kalinets/work/demos/fwdays-arch-2021/easy-configs/src/TestService/sessions.json";
 
 while (!File.Exists(ConfigPath)) { Thread.Sleep(1000); }
 
@@ -13,7 +22,7 @@ var app = WebHost.CreateDefaultBuilder()
     .Configure((ctx, builder) => builder
            .UseRouting()
            .UseEndpoints(
-               e => e.MapGet("/", c => c.Response.WriteAsync($"Hello World! The name is {GetName(c)}. Uptime is {DateTime.Now.Subtract(startTime)}. Some stats: {new {Environment.ProcessorCount, Memory = GC.GetTotalMemory(true)}}"))))
+               e => e.MapGet("/", c => c.Response.WriteAsync(GetContent(c)))))
     .Build();
 
 app.Run();
