@@ -28,7 +28,7 @@ spec:
           exec:
             command:
             - cat
-            - /config/my_config.json
+            - /config/sessions.json
           initialDelaySeconds: 1
           periodSeconds: 5
         ports:

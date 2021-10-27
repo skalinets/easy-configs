@@ -1,8 +1,16 @@
 {
-  "sessions": [
-    { "name": "Session 1", "level": "Basic" },
-    { "name": "Session 2", "level": "Intermediate" },
-    { "name": "Session 3", "level": "Advanced" }
-  ]
+    "sessions": [
+        {
+            "name": "Awesome Session about Squares",
+            "level": "Intermediate"
+        },
+        {
+            "name": "Squares and Clouds on the same Diagram",
+            "level": "Advanced"
+        },
+        {
+            "name": "Why UML is Bad",
+            "level": "Advanced"
+        }
+    ]
 }
-

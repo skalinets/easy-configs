@@ -12,8 +12,7 @@ string GetContent(HttpContext context) =>
 
    + $"\n\nUptime is {DateTime.Now.Subtract(startTime)}";
 
-//const string ConfigPath ="/config/sessions.json";
-const string ConfigPath ="/Users/serhii.kalinets/work/demos/fwdays-arch-2021/easy-configs/src/TestService/sessions.json";
+const string ConfigPath ="/config/sessions.json";
 
 while (!File.Exists(ConfigPath)) { Thread.Sleep(1000); }
 
