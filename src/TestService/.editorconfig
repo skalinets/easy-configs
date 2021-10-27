@@ -161,6 +161,8 @@ csharp_style_conditional_delegate_call = true:warning
 csharp_prefer_braces = true:warning
 csharp_prefer_simple_using_statement = true:suggestion
 dotnet_diagnostic.IDE0063.severity = suggestion
+dotnet_diagnostic.CS8602.severity = none
+dotnet_diagnostic.IDE1006.severity = none
 # 'using' directive preferences
 csharp_using_directive_placement = inside_namespace:warning
 # Modifier preferences
